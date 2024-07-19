@@ -1,11 +1,27 @@
 package com.taco.tacocloud.entity;
 
-import lombok.Data;
+
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 public class Taco {
-    private final String name;
+    private String name;
     private List<Ingredient> ingredients;
+
+    public Taco() {
+    }
+
+    public Taco(String name) {
+        this.name = name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 }
