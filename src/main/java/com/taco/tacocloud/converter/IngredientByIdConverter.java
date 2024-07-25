@@ -1,7 +1,8 @@
 package com.taco.tacocloud.converter;
 
 import com.taco.tacocloud.entity.Ingredient;
-import com.taco.tacocloud.entity.Ingredient.Type;
+import com.taco.tacocloud.entity.Type;
+import lombok.NonNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -10,24 +11,23 @@ import java.util.Map;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
-    private Map<String, Ingredient> ingredientMap = new HashMap<>();
+    private final Map<String, Ingredient> map = new HashMap<>();
 
     public IngredientByIdConverter() {
-        ingredientMap.put("FLTO",
-                new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP)); ingredientMap.put("COTO",
-                new Ingredient("COTO", "Corn Tortilla", Type.WRAP)); ingredientMap.put("GRBF",
-                new Ingredient("GRBF", "Ground Beef", Type.PROTEIN)); ingredientMap.put("CARN",
-                new Ingredient("CARN", "Carnitas", Type.PROTEIN)); ingredientMap.put("TMTO",
-                new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES)); ingredientMap.put("LETC",
-                new Ingredient("LETC", "Lettuce", Type.VEGGIES)); ingredientMap.put("CHED",
-                new Ingredient("CHED", "Cheddar", Type.CHEESE)); ingredientMap.put("JACK",
-                new Ingredient("JACK", "Monterrey Jack", Type.CHEESE)); ingredientMap.put("SLSA",
-                new Ingredient("SLSA", "Salsa", Type.SAUCE)); ingredientMap.put("SRCR",
-                new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
+        map.put("AA", new Ingredient("AA", "Tomato", Type.VEGGIES));
+        map.put("AB", new Ingredient("AB", "Cucumber", Type.VEGGIES));
+        map.put("BA", new Ingredient("BA", "Holland", Type.CHEESE));
+        map.put("BB", new Ingredient("BB", "Cream", Type.CHEESE));
+        map.put("CA", new Ingredient("CA", "Cabbage", Type.WRAP));
+        map.put("CB", new Ingredient("CB", "Bread", Type.WRAP));
+        map.put("DA", new Ingredient("DA", "Pepper", Type.SAUCE));
+        map.put("DB", new Ingredient("DB", "Salsa", Type.SAUCE));
+        map.put("EA", new Ingredient("EA", "Meat", Type.PROTEIN));
+        map.put("EB", new Ingredient("EB", "Sheep", Type.PROTEIN));
     }
 
     @Override
     public Ingredient convert(String id) {
-        return ingredientMap.get(id);
+        return map.get(id);
     }
 }
