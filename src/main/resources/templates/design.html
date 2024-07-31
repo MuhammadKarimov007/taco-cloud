@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Design your taco</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>Design your taco</h1>
     <form method="post" th:object="${taco}">
         <h4>Choose your wrap:</h4>
+        <span
+                th:if="${#fields.hasErrors('ingredients')}"
+                th:errors="${taco.ingredients}"
+                class="error"
+        ></span>
         <div th:each="ingredient : ${wrap}">
             <label>
                 <input type="checkbox" th:field="${taco.ingredients}" th:value="${ingredient.id}">
@@ -49,6 +59,11 @@
 
         <label>
             Name your taco: <input type="text" th:field="*{name}">
+            <span
+                    th:if="${#fields.hasErrors('name')}"
+                    th:errors="${taco.name}"
+                    class="error"
+            ></span>
         </label>
 
         <input type="submit" th:value="Submit">

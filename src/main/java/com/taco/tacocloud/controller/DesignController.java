@@ -4,8 +4,10 @@ import com.taco.tacocloud.entity.Ingredient;
 import com.taco.tacocloud.entity.Taco;
 import com.taco.tacocloud.entity.TacoOrder;
 import com.taco.tacocloud.entity.Type;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -55,8 +57,13 @@ public class DesignController {
     }
 
     @PostMapping
-    public String processDesign(Taco taco,
+    public String processDesign(@Valid Taco taco, Errors errors,
                                 @ModelAttribute TacoOrder order) {
+
+        if (errors.hasErrors()) {
+            return "design";
+        }
+
         order.addTaco(taco);
 
         return "redirect:/orders/current";
